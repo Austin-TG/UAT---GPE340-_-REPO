@@ -6,19 +6,14 @@ public class Health : MonoBehaviour
 {   
     // VARIABLES
     // player health
-    [SerializeField, Tooltip("Max Health Pawn can have.")] private float maxHealth;
+    [SerializeField, Tooltip("Max Health Pawn can have.")] public float maxHealth;
     [SerializeField, Tooltip("Initial, Starting Health Pawn has.")] public float initialHealth;
     private float deciHealth;
-    // player damage
-    private float damage;
-    private float damageTaken;
-    // Pickup healing 
-    private float healHealth;
+    public bool pRentry = false;
 
+    // Object Variables
     private RagdollControl rd;
     private Enemy ai;
-
-
 
     // Start is called before the first frame update
     private void Start()
@@ -38,8 +33,20 @@ public class Health : MonoBehaviour
         }
         if(initialHealth <= 0)
         {
-            // if less than call OnDeath()
-            OnDeath();
+            if (GameManager.preventRentry == false)
+            {
+                GameManager.preventRentry = true;
+                // if less than call OnDeath()
+                initialHealth = 0;
+                OnDeath();
+                return;
+            }
+            if(gameObject.CompareTag("Enemy"))
+            {
+                initialHealth = 0;
+                OnDeath();
+                return;
+            }
         }
     }
     // function to return decimal value to UI to set health percentage to canvas
@@ -67,7 +74,9 @@ public class Health : MonoBehaviour
         }
         if(gameObject.CompareTag("Enemy"))
         {
+            Destroy(this);
             ai.isDead = true;
+            ai.OnDie();
         }
         rd.isDead = true;
     }

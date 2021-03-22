@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 7975836805013187231}
   - component: {fileID: 7975836805016087231}
   - component: {fileID: 7975836805015087231}
-  - component: {fileID: 8516160284544263166}
   - component: {fileID: 6355433558836158231}
   - component: {fileID: 7069888018561489852}
+  - component: {fileID: 7869163948881158151}
   m_Layer: 0
-  m_Name: RifleBullet
+  m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7975836805013157567}
   m_LocalRotation: {x: -0.000000059604645, y: -1.1102229e-16, z: 1.11022296e-16, w: 1}
-  m_LocalPosition: {x: 0.00003, y: 0.00091, z: 0.01358}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.00003, y: 0.6253, z: 0.1261}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children:
   - {fileID: 1718610819472372706}
   m_Father: {fileID: 0}
@@ -85,7 +85,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!96 &8516160284544263166
+--- !u!114 &6355433558836158231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7975836805013157567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e203d5d834e54c64c9d21747056c0aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireSpeed: 50
+  delayTime: 0.5
+  damageTaken: 10
+--- !u!135 &7069888018561489852
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7975836805013157567}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0003665092
+  m_Center: {x: -0.0000044225235, y: 0.0000045302495, z: 0.00008521549}
+--- !u!96 &7869163948881158151
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -129,13 +157,13 @@ TrailRenderer:
   m_Time: 5
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.07547491
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.010004044
+        time: 0.038627576
+        value: 0.10416667
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -147,7 +175,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.9339623, g: 0.15172191, b: 0.110137045, a: 1}
+      key0: {r: 1, g: 0.9286856, b: 0.5424528, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -183,34 +211,6 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &6355433558836158231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7975836805013157567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e203d5d834e54c64c9d21747056c0aba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireSpeed: 50
-  delayTime: 0.5
-  damageTaken: 10
---- !u!135 &7069888018561489852
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7975836805013157567}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.0003665092
-  m_Center: {x: -0.0000044225235, y: 0.0000045302495, z: 0.00008521549}
 --- !u!1001 &6570290827755458226
 PrefabInstance:
   m_ObjectHideFlags: 0

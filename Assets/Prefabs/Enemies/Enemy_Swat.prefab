@@ -1163,7 +1163,7 @@ GameObject:
   - component: {fileID: 7406285500349798713}
   - component: {fileID: -3476672401738514080}
   m_Layer: 0
-  m_Name: Enemy_SWAT
+  m_Name: Enemy_Swat
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1288,6 +1288,11 @@ MonoBehaviour:
   - {fileID: 4972716662831043729, guid: 7776ee47ed84f294ead8d936a53e77f4, type: 3}
   shootDistance: 050000000a00000005000000
   weaponStartPosition: {fileID: 4295381802260305094}
+  itemDropChance: 1
+  itemDrops:
+  - {fileID: -2066459198152368298, guid: 1bc47ac95b4180f44bcb2376eded36e7, type: 3}
+  - {fileID: 785472034647253451, guid: 85ff7c7d82c182044a4b1aff4fbd0a3b, type: 3}
+  - {fileID: 4483854852146287519, guid: b92e442bcf80f244fb56fddae0c04de9, type: 3}
   weapon: {fileID: 0}
   isDead: 0
 --- !u!114 &-3476672401738514080

@@ -9,6 +9,10 @@ public class CameraFollow : MonoBehaviour
     // offset set to public to allow Designers to change the offset from pawn
     public Vector3 offset;
 
+    private void Start()
+    {
+        CameraTarget = GameManager.player.transform;
+    }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.F12))

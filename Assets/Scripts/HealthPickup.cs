@@ -12,7 +12,7 @@ public class HealthPickup : Pickup
 
     public override void Start()
     {
-        
+        health = GameManager.player.GetComponent<Health>();
     }
 
     public override void OnPickUp ()

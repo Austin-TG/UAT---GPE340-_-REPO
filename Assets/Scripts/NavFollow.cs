@@ -52,12 +52,15 @@ public class NavFollow : Enemy
                 return;
             }
         }
-        if(GameManager.player != null)
+        if (isDead != true)
         {
-            if(GameManager.isDead != true)
+            if (GameManager.player != null)
             {
-                gameObject.transform.LookAt(GameManager.player.transform.position);
-                navAgent.SetDestination(GameManager.player.transform.position);
+                if (GameManager.isDead != true)
+                {
+                    gameObject.transform.LookAt(GameManager.player.transform.position);
+                    navAgent.SetDestination(GameManager.player.transform.position);
+                }
             }
         }
     }
