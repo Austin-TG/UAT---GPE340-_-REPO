@@ -12,15 +12,19 @@ public class GameManager : MonoBehaviour
 
     // Pause Variables
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject isOptionsOpen;
     public static bool isPaused;
 
     // Lose Screen Variable
     [SerializeField] private GameObject loseScreen;
-    public bool loseGame;
+    public static bool loseGame;
 
     // Win Screen Variable
     [SerializeField] private GameObject winScreen;
-    public bool winGame;
+    public static bool winGame;
+
+    //Main Menu Startup script
+    [SerializeField] private MainMenu mmStart;
 
     private static GameManager instance;
     private void Awake()
@@ -36,8 +40,7 @@ public class GameManager : MonoBehaviour
         }
 
         if(player == null)
-        {
-            Debug.Log("Null");   
+        {  
             SpawnPlayer();
         }
 
@@ -45,6 +48,10 @@ public class GameManager : MonoBehaviour
         {
             pauseMenu = GameObject.FindGameObjectWithTag("PauseMenuUI");
         }
+    }
+    private void Start()
+    {
+        mmStart.onGameStart();
     }
     // Update is called once per frame
     private void Update()
@@ -86,7 +93,7 @@ public class GameManager : MonoBehaviour
     private void SpawnPlayer()
     {
         player = Instantiate(playerInst, gameObject.transform.position, Quaternion.identity);
-        
+
         if (player == null)
         {
             player = GameObject.FindWithTag("Player");
@@ -95,7 +102,15 @@ public class GameManager : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0f;
-        pauseMenu.SetActive(true);
+        if(isOptionsOpen.activeSelf)
+        {
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            pauseMenu.SetActive(true);
+        }
+
     }
     public void Resume()
     {
@@ -112,4 +127,5 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         winScreen.SetActive(true);
     }    
+    
 }

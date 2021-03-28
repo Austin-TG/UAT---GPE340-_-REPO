@@ -6,8 +6,8 @@ public class Health : MonoBehaviour
 {   
     // VARIABLES
     // player health
-    [SerializeField, Tooltip("Max Health Pawn can have.")] public float maxHealth;
-    [SerializeField, Tooltip("Initial, Starting Health Pawn has.")] public float initialHealth;
+    [Tooltip("Max Health Pawn can have.")] public float maxHealth;
+    [Tooltip("Initial, Starting Health Pawn has.")] public float initialHealth;
     private float deciHealth;
     public bool pRentry = false;
 
@@ -35,6 +35,7 @@ public class Health : MonoBehaviour
         {
             if (GameManager.preventRentry == false)
             {
+                Debug.Log("Calling");
                 GameManager.preventRentry = true;
                 // if less than call OnDeath()
                 initialHealth = 0;
@@ -58,12 +59,12 @@ public class Health : MonoBehaviour
     // if healthpickup heal gameobjects health, health value passed to here
     public void AddHealth(float healing)
     {
-        initialHealth = initialHealth + healing;
+        initialHealth += healing;
     }
     // function to cover damage to gameobjects health, damage value passed to here
     public void DamageToHealth(float damage)
     {
-        initialHealth = initialHealth - damage;
+        initialHealth -= damage;
     }
     // function to call destroy gameobject when health is less than or equal to 0
     public void OnDeath()

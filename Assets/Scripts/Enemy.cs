@@ -21,6 +21,8 @@ public abstract class Enemy : MonoBehaviour
     protected int distanceToShoot;
     public Weapon weapon;
     public bool isDead;
+    [SerializeField] private ParticleSystem muzzleFlash;
+    private ParticleSystem afterMuzzleFlash;
 
     static public System.Random rnd;
 
@@ -59,11 +61,12 @@ public abstract class Enemy : MonoBehaviour
     }
     private void CheckDistanceToPlayer()
     {
-        if (GameManager.isDead != true)
+        if (GameManager.isDead == false)
         {
             float dist = Vector3.Distance(gameObject.transform.position, GameManager.player.transform.position);
             CheckIFCanFire(dist);
         }
+        else return;
     }
     private void CheckIFCanFire(float _dist)
     {
@@ -73,7 +76,12 @@ public abstract class Enemy : MonoBehaviour
             {
                 if (_dist <= distanceToShoot)
                 {
+                    afterMuzzleFlash = Instantiate(muzzleFlash, weapon.bulletStart.transform.position, Quaternion.identity);
                     weapon.FireBullet();
+                    if (afterMuzzleFlash.isStopped)
+                    {
+                        Destroy(afterMuzzleFlash);
+                    }
                 }
             }
         }
@@ -82,7 +90,6 @@ public abstract class Enemy : MonoBehaviour
     {
         int randomInt = Random.Range(0, itemDrops.Length);
         chosenItem = itemDrops[randomInt].dropItem;
-        Debug.Log(chosenItem);
         return chosenItem;
     }
     public void DropItem()

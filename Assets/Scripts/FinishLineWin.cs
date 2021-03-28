@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class FinishLineWin : MonoBehaviour
 {
-    [SerializeField] private GameManager gm;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag is "Player")
         {
-            gm.winGame = true;
+            GameManager.winGame = true;
         }
     }
 }

@@ -8,12 +8,13 @@ public class Bullet : MonoBehaviour
     public float delayTime;
     [SerializeField, Tooltip("Damage to Enemies")] private float damageTaken;
 
-    // Class Variables
-    private Health damage;
-    
-    private void Start()
+    // Audio Vars
+    [SerializeField] private AudioClip firebullet;
+    [SerializeField] private AudioSource audioSource;
+
+    private void Awake()
     {
-        damage = GetComponent<Health>();
+        audioSource = GetComponent<AudioSource>();
     }
     // update - get bullets position and set new position, destroy object after delaytime
     private void Update()
@@ -32,10 +33,16 @@ public class Bullet : MonoBehaviour
         Health otherHealth = otherObj.GetComponent<Health>();
         // if otherObj's health is not null/0 apply damage
         if (otherHealth != null)
-        {   
+        {
             // call object health to be damaged by calling to damamgetohealth in Health script
+            AudioFireBullet();
             otherHealth.DamageToHealth(damageTaken);
+            Destroy(gameObject);
         }
+    }
+    private void AudioFireBullet()
+    {
+        audioSource.PlayOneShot(firebullet);
     }
     
 }

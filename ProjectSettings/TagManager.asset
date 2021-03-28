@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - Enemy
   - PauseMenuUI
+  - GameManager
   layers:
   - Default
   - TransparentFX

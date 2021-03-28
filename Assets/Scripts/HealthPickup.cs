@@ -9,10 +9,12 @@ public class HealthPickup : Pickup
 
     // Class Variables
     public Health health;
+    private PlayerRootMotion pRM;
 
     public override void Start()
     {
         health = GameManager.player.GetComponent<Health>();
+        pRM = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerRootMotion>();
     }
 
     public override void OnPickUp ()
@@ -23,6 +25,7 @@ public class HealthPickup : Pickup
     {
         if(collision.gameObject.tag == "Player")
         {
+            pRM.ammoCount += 10;
             health.AddHealth(healing);
         }
         base.OnTriggerEnter(collision);

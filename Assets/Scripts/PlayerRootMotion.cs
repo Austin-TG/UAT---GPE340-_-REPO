@@ -6,12 +6,14 @@ public class PlayerRootMotion : MonoBehaviour
 {
     // Allows User/Game Designer to change speed value in the inspector \\ Unity Program
     [SerializeField, Tooltip("The max speed of the player")] private float speed = 4f;
-    [SerializeField, Tooltip("Starting Ammo Count")] public int ammoCount = 60;
+    [Tooltip("Starting Ammo Count")] public int ammoCount = 60;
 
     private Animator anim;
     private CharacterController controller;
     public Weapon weapon;
     private RagdollControl rdC;
+    private Health health;
+    [SerializeField] private ParticleSystem muzzleFlash;
 
     // OnLoad, connect Components to Variables
     private void Awake()
@@ -19,12 +21,8 @@ public class PlayerRootMotion : MonoBehaviour
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         rdC = GetComponent<RagdollControl>();
+        health = GetComponent<Health>();
     }
-    private void Start()
-    {
-        
-    }
-
     // Every Frame, update movement input
     //              update character grounded to check for ability to crouch
     private void Update()
@@ -32,8 +30,13 @@ public class PlayerRootMotion : MonoBehaviour
         if (rdC.isDead == false)
         {
             if(GameManager.isPaused == false)
-                    {
-
+            {
+                if (gameObject.transform.position.y < -10 && health.initialHealth != 0)
+                {
+                    health.initialHealth = 0;
+                    health.OnDeath();
+                    return;
+                }
 
                 // Pull X/Z axis data and initialize to new variable "input"
                 Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
@@ -71,14 +74,19 @@ public class PlayerRootMotion : MonoBehaviour
                 {
                     if (ammoCount <= 0)
                     {
-                        // DO NOTHING...yet
+                        // DO NOTHING...
                     }
                     else
                     {
+                        Instantiate(muzzleFlash, weapon.bulletStart.transform.position, Quaternion.identity);
                         weapon.FireBullet();
                         ammoCount--;
                         Debug.Log(ammoCount);
                     }
+                }// END OF IF(MouseButtonDown)
+                if(ammoCount > 60)
+                {
+                    ammoCount = 60;
                 }
             } // END OF IF(PAUSED = FALSE)
             // Controls for Pausing/Unpausing game
@@ -86,21 +94,10 @@ public class PlayerRootMotion : MonoBehaviour
             {
                 GameManager.isPaused = !GameManager.isPaused;
             }
-        }// End of IF isDead is False
-
-        // NO LONGER IN USE, TEST RAGDOLL
-        /* if(Input.GetKeyDown(KeyCode.F1))
-        {
-            rdC.isDead = true;
         }
-        if(Input.GetKeyDown(KeyCode.F2))
-        {
-            rdC.isDead = false;
-            rdC.TurnOffRagdoll();
-        } */
     }
 
-    // animator for IK
+    // Inverse Kinematics for Weapon Hand Points
     private void OnAnimatorIK(int layerIndex)
     {
         // using mask < set the IK Position relative to the weapons handpoint positions

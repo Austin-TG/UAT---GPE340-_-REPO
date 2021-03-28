@@ -22,10 +22,10 @@ public class NavFollow : Enemy
     // Update is called once per frame
     public override void Update()
     {
-        SetDestinationToPlayer();
-
         if (isDead != true)
         {
+            SetDestinationToPlayer();
+
             // Set wanted velocity to the navAgent instead of using animator velocity
             Vector3 navInput = navAgent.desiredVelocity;
             desiredVelo = Vector3.MoveTowards(desiredVelo, navAgent.desiredVelocity, navAgent.acceleration * Time.deltaTime);
