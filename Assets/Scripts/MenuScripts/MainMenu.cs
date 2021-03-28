@@ -101,8 +101,13 @@ public class MainMenu : MonoBehaviour
         if (_isFullscreen.isOn == true)
         {
             PlayerPrefs.SetInt("Fullscreen Toggle", 1);
+            Screen.fullScreen = true;
         }
-        else PlayerPrefs.SetInt("Fullscreen Toggle", 0);
+        else
+        {
+            PlayerPrefs.SetInt("Fullscreen Toggle", 0);
+            Screen.fullScreen = false;
+        }
 
         // RESOLUTION SAVE
         PlayerPrefs.SetInt("Resolution", _resolution.value);
